@@ -12,7 +12,8 @@ def face_confidence(face_distance, face_match_threshold=0.6):
     if face_distance > face_match_threshold:
         return str(round(linear_val * 100, 2)) + '%'
     else:
-        value = (linear_val + ((1.0 - linear_val) * math.pow((linear_val -  0.5) *2, 0.2))) * 100
+        value = (linear_val + ((1.0 - linear_val) * math.pow((linear_val -  0.5) * 2, 0.2))) * 100
+        return str(round(value, 2)) + '%'
 
 class FaceRecognition:
     face_locations = []
@@ -45,7 +46,7 @@ class FaceRecognition:
             ret, frame = video_capture.read()
 
             if self.proccess_current_frame:
-                small_frame = cv2.resizse(frame, (0.0), fx=0.25, fy=0.25)
+                small_frame = cv2.resize(frame, (0,0), fx=0.25, fy=0.25)
                 rgb_small_frame = small_frame[:, :, ::-1]
 
                 self.face_locations = face_recognition.face_locations(rgb_small_frame)
@@ -64,7 +65,7 @@ class FaceRecognition:
                         name = self.known_face_names[best_match_index]
                         confidence = face_confidence(face_distances[best_match_index])
 
-                        self.face_names_append(f'{name} ({confidence})')
+                        self.face_names.append(f'{name} ({confidence})')
 
             self.proccess_current_frame = not self.proccess_current_frame
 
