@@ -67,6 +67,10 @@ class FaceRecognition:
 
                         self.face_names.append(f'{name} ({confidence})')
 
+                    else:
+                        name = f"Unknown"
+                        self.face_names.append(f'{name}')
+
             self.proccess_current_frame = not self.proccess_current_frame
 
             for(top, right, bottom, left), name in zip(self.face_locations, self.face_names):
